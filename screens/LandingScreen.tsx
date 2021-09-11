@@ -1,9 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Box, Text, VStack, Image, Button, Spinner } from "native-base";
 import React from "react";
+import { RootStackParamList } from "../types";
 
 const LandingScreen = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, "Landing">>();
   return (
     <VStack flex={1}>
       <Image
@@ -32,6 +35,7 @@ const LandingScreen = () => {
           bg="black"
           size="sm"
           borderRadius={50}
+          //TODO: change back to replace later
           onPress={() => navigation.navigate("Root")}
         >
           <Spinner color="white" size="sm" />
