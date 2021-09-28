@@ -6,6 +6,7 @@ import { extendTheme, NativeBaseProvider } from "native-base";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
+import { ProvideAuth, useAuth } from "./hooks/useAuth";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -15,19 +16,20 @@ export default function App() {
     },
   };
   const theme = extendTheme({ colors: newColorTheme });
-
   const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <NativeBaseProvider theme={theme}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
-      </NativeBaseProvider>
+      <ProvideAuth>
+        <NativeBaseProvider theme={theme}>
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SafeAreaProvider>
+        </NativeBaseProvider>
+      </ProvideAuth>
     );
   }
 }
