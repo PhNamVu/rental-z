@@ -12,6 +12,7 @@ declare global {
 }
 
 export type RootStackParamList = {
+  Auth: NavigatorScreenParams<AuthTabParamList> | undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
@@ -41,4 +42,14 @@ export type HomeParamList = {
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
+};
+
+export type AuthStackParamList = {
+  TabLogin: undefined;
+  TabSignUp: undefined;
+};
+
+export type AuthTabParamList = {
+  TabLogin: undefined;
+  TabSignUp: undefined;
 };

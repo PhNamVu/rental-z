@@ -10,6 +10,7 @@ import LandingScreen from "../screens/LandingScreen";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
+import AuthTabNavigator from "./AuthTabNavigator";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 
@@ -37,6 +38,7 @@ function RootNavigator() {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Landing" component={LandingScreen} />
+      <Stack.Screen name="Auth" component={AuthTabNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen
         name="NotFound"

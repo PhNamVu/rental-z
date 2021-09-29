@@ -36,7 +36,7 @@ const LandingScreen = () => {
           size="sm"
           borderRadius={50}
           //TODO: change back to replace later
-          onPress={() => navigation.navigate("Root")}
+          onPress={() => navigation.navigate("Auth")}
         >
           <Spinner color="white" size="sm" />
         </Button>
