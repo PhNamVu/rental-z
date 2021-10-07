@@ -1,21 +1,34 @@
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { Box, Text, VStack, Button, View, Input } from "native-base";
-import React from "react";
-import { Formik } from "formik";
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { Box, Text, VStack, Button, View, Input } from 'native-base'
+import React from 'react'
+import { Formik } from 'formik'
 
-import { AuthStackParamList } from "../types";
-import { LoginSchemaValidation } from "../helpers/validation";
-import Colors from "../constants/Colors";
+import { AuthStackParamList } from '../types'
+import { LoginSchemaValidation } from '../helpers/validation'
+import Colors from '../constants/Colors'
+import { negativeToast, positiveToast } from '../helpers/toaster'
+import { fbase, useAuth } from '../hooks/useAuth'
 
 export interface LoginForm {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 const LoginScreen = () => {
+  const { state, signout }: any = useAuth()
   const navigation =
-    useNavigation<StackNavigationProp<AuthStackParamList, "TabLogin">>();
+    useNavigation<StackNavigationProp<AuthStackParamList, 'TabLogin'>>()
+
+  const handleSubmit = async (email: string, password: string) => {
+    try {
+      await fbase.auth().signInWithEmailAndPassword(email, password)
+      positiveToast('Login Successful')
+    } catch (error) {
+      negativeToast('Fail')
+    }
+  }
+
   return (
     <VStack flex={1} justifyContent="space-evenly" mt={5} mx={10}>
       <Box>
@@ -26,32 +39,34 @@ const LoginScreen = () => {
       <Box>
         <Formik
           initialValues={{
-            email: "",
-            password: "",
+            email: '',
+            password: '',
           }}
-          onSubmit={(values) => console.log(JSON.stringify(values))}
+          onSubmit={() => {
+            console.log('submit')
+          }}
           validationSchema={LoginSchemaValidation}
         >
           {({
+            isSubmitting,
             values,
             handleChange,
             errors,
             setFieldTouched,
             touched,
             isValid,
-            handleSubmit,
           }) => (
             <View>
               <Input
                 _focus={{ borderColor: Colors.primary.text }}
                 value={values.email}
-                onChangeText={handleChange("email")}
-                onBlur={() => setFieldTouched("email")}
+                onChangeText={handleChange('email')}
+                onBlur={() => setFieldTouched('email')}
                 placeholder="E-mail"
                 isInvalid={touched.email && !!errors.email}
               />
               {touched.email && errors.email && (
-                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                <Text style={{ fontSize: 12, color: '#FF0D10' }}>
                   {errors.email}
                 </Text>
               )}
@@ -59,14 +74,14 @@ const LoginScreen = () => {
                 _focus={{ borderColor: Colors.primary.text }}
                 mt={8}
                 value={values.password}
-                onChangeText={handleChange("password")}
+                onChangeText={handleChange('password')}
                 placeholder="Password"
-                onBlur={() => setFieldTouched("password")}
+                onBlur={() => setFieldTouched('password')}
                 secureTextEntry={true}
                 isInvalid={touched.email && !!errors.email}
               />
               {touched.password && errors.password && (
-                <Text style={{ fontSize: 12, color: "#FF0D10" }}>
+                <Text style={{ fontSize: 12, color: '#FF0D10' }}>
                   {errors.password}
                 </Text>
               )}
@@ -76,14 +91,15 @@ const LoginScreen = () => {
                   fontWeight={500}
                   color={Colors.primary.text}
                 >
-                  {" "}
+                  {' '}
                   Forgot password?
                 </Text>
               </Box>
               <Button
+                isLoading={isSubmitting}
                 color="#3740FE"
                 disabled={!isValid}
-                onPress={() => handleSubmit}
+                onPress={() => handleSubmit(values.email, values.password)}
               >
                 Sign In
               </Button>
@@ -99,14 +115,14 @@ const LoginScreen = () => {
           fontSize="md"
           fontWeight={500}
           color={Colors.primary.text}
-          onPress={() => navigation.replace("TabSignUp")}
+          onPress={() => navigation.replace('TabSignUp')}
         >
-          {" "}
+          {' '}
           Sign Up
         </Text>
       </Box>
     </VStack>
-  );
-};
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen

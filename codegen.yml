@@ -1,0 +1,28 @@
+overwrite: true
+schema: 'https://rental-z.hasura.app/v1/graphql'
+headers:
+  x-hasura-admin-secret: '12345678'
+documents: 'generated/queries/**.gql'
+generates:
+  generated/hooks.tsx:
+    plugins:
+      - 'typescript-react-apollo'
+    presetConfig:
+      typesPath: './operations'
+    preset: 'import-types'
+    config:
+      withHOC: false
+      withComponent: false
+      withHooks: true
+  generated/operations.tsx:
+    preset: 'import-types'
+    plugins:
+      - 'typescript-operations'
+    presetConfig:
+      typesPath: './schemas'
+  generated/schemas.tsx:
+    plugins:
+      - 'typescript'
+hooks:
+  afterAllFileWrite:
+    - prettier --write

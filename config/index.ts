@@ -1,16 +1,15 @@
 const local = {
-    domain: 'http://localhost:3000',
     firebase: {
-        apiKey: "AIzaSyB_TKrx2nBAPWswJUlo3m_Ujg_2zTrwM_g",
-        authDomain: "task-management-f47b5.firebaseapp.com",
-        projectId: "task-management-f47b5",
-        storageBucket: "task-management-f47b5.appspot.com",
-        messagingSenderId: "358561542627",
-        appId: "1:358561542627:web:5df1e74143bce601b5f0d6",
-        measurementId: "G-93CF7LW8WS"
+        apiKey: "AIzaSyCYb_VYksw5fm_zwGWwBpRxiaxw_dyecTQ",
+        authDomain: "rental-z.firebaseapp.com",
+        projectId: "rental-z",
+        storageBucket: "rental-z.appspot.com",
+        messagingSenderId: "235354358083",
+        appId: "1:235354358083:web:dbd27ec08911eee2c9aff6",
+        measurementId: "G-JFKQ05SGH4"
     },
-    httpGrapqlUri: 'https://task-management.hasura.app/v1/graphql',
-    wsGrapqlUri: 'wss://task-management.hasura.app/v1/graphql',
+    httpGrapqlUri: 'https://rental-z.hasura.app/v1/graphql',
+    wsGrapqlUri: 'wss://rental-z.hasura.app/v1/graphql',
     }
 
 const environment = local

@@ -1,18 +1,19 @@
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { Box, Text, VStack, Image, Button, Spinner } from "native-base";
-import React from "react";
-import { RootStackParamList } from "../types";
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { Box, Text, VStack, Image, Button, Spinner } from 'native-base'
+import React from 'react'
+import { AntDesign } from '@expo/vector-icons'
+import { AuthStackParamList } from '../types'
 
 const LandingScreen = () => {
   const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, "Landing">>();
+    useNavigation<StackNavigationProp<AuthStackParamList, 'Landing'>>()
   return (
     <VStack flex={1}>
       <Image
         w="100%"
         h="68%"
-        source={require("../assets/images/landing.jpg")}
+        source={require('../assets/images/landing.jpg')}
         alt="landing pic"
       />
       <Box mt={5} ml={5}>
@@ -36,13 +37,13 @@ const LandingScreen = () => {
           size="sm"
           borderRadius={50}
           //TODO: change back to replace later
-          onPress={() => navigation.navigate("Auth")}
+          onPress={() => navigation.navigate('TabLogin')}
         >
-          <Spinner color="white" size="sm" />
+          <AntDesign name="right" size={24} color="white" />
         </Button>
       </Box>
     </VStack>
-  );
-};
+  )
+}
 
-export default LandingScreen;
+export default LandingScreen
