@@ -8,7 +8,7 @@ import { AuthStackParamList } from '../types'
 import { LoginSchemaValidation } from '../helpers/validation'
 import Colors from '../constants/Colors'
 import { negativeToast, positiveToast } from '../helpers/toaster'
-import { fbase, useAuth } from '../hooks/useAuth'
+import { fbase } from '../hooks/useAuth'
 
 export interface LoginForm {
   email: string
@@ -16,7 +16,6 @@ export interface LoginForm {
 }
 
 const LoginScreen = () => {
-  const { state, signout }: any = useAuth()
   const navigation =
     useNavigation<StackNavigationProp<AuthStackParamList, 'TabLogin'>>()
 

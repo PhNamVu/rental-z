@@ -23,3 +23,14 @@ export const LoginSchemaValidation = Yup.object({
       'Passwords does not match'
     ).required('Please confirm your password'),
   })
+
+export const RentalSchemaValidation = Yup.object({
+    title: Yup.string().required('Title is required.'),
+    thumbnail: Yup.string().required('Thumbnail is required.'),
+    typeId: Yup.string().required('Type is required.'),
+    price: Yup.number().required('Price is required.').positive('Price must be positive'),
+    area: Yup.number().required('Area is required.').positive('Area must be positive'),
+    bedroom: Yup.number().required('Bedroom is required.').positive('Bed must be positive'),
+    location: Yup.string().required('Location is required.'),
+    description: Yup.string().required('Description is required.'),
+})

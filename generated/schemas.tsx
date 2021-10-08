@@ -18,6 +18,19 @@ export type Scalars = {
   timestamptz: any
 }
 
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Int']>
+  _gt?: Maybe<Scalars['Int']>
+  _gte?: Maybe<Scalars['Int']>
+  _in?: Maybe<Array<Scalars['Int']>>
+  _is_null?: Maybe<Scalars['Boolean']>
+  _lt?: Maybe<Scalars['Int']>
+  _lte?: Maybe<Scalars['Int']>
+  _neq?: Maybe<Scalars['Int']>
+  _nin?: Maybe<Array<Scalars['Int']>>
+}
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>
@@ -78,23 +91,294 @@ export type UserSetupRes = {
   statusCode?: Maybe<Scalars['Int']>
 }
 
+/** columns and relationships of "furniture" */
+export type Furniture = {
+  __typename?: 'furniture'
+  id: Scalars['Int']
+  /** fetch data from the table: "rentals" */
+  rentals: Array<Rentals>
+  /** An aggregate relationship */
+  rentals_aggregate: Rentals_Aggregate
+  title: Scalars['String']
+}
+
+/** columns and relationships of "furniture" */
+export type FurnitureRentalsArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+/** columns and relationships of "furniture" */
+export type FurnitureRentals_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+/** aggregated selection of "furniture" */
+export type Furniture_Aggregate = {
+  __typename?: 'furniture_aggregate'
+  aggregate?: Maybe<Furniture_Aggregate_Fields>
+  nodes: Array<Furniture>
+}
+
+/** aggregate fields of "furniture" */
+export type Furniture_Aggregate_Fields = {
+  __typename?: 'furniture_aggregate_fields'
+  avg?: Maybe<Furniture_Avg_Fields>
+  count: Scalars['Int']
+  max?: Maybe<Furniture_Max_Fields>
+  min?: Maybe<Furniture_Min_Fields>
+  stddev?: Maybe<Furniture_Stddev_Fields>
+  stddev_pop?: Maybe<Furniture_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Furniture_Stddev_Samp_Fields>
+  sum?: Maybe<Furniture_Sum_Fields>
+  var_pop?: Maybe<Furniture_Var_Pop_Fields>
+  var_samp?: Maybe<Furniture_Var_Samp_Fields>
+  variance?: Maybe<Furniture_Variance_Fields>
+}
+
+/** aggregate fields of "furniture" */
+export type Furniture_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Furniture_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type Furniture_Avg_Fields = {
+  __typename?: 'furniture_avg_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "furniture". All fields are combined with a logical 'AND'. */
+export type Furniture_Bool_Exp = {
+  _and?: Maybe<Array<Furniture_Bool_Exp>>
+  _not?: Maybe<Furniture_Bool_Exp>
+  _or?: Maybe<Array<Furniture_Bool_Exp>>
+  id?: Maybe<Int_Comparison_Exp>
+  rentals?: Maybe<Rentals_Bool_Exp>
+  title?: Maybe<String_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "furniture" */
+export enum Furniture_Constraint {
+  /** unique or primary key constraint */
+  FurniturePkey = 'furniture_pkey',
+}
+
+/** input type for incrementing numeric columns in table "furniture" */
+export type Furniture_Inc_Input = {
+  id?: Maybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "furniture" */
+export type Furniture_Insert_Input = {
+  id?: Maybe<Scalars['Int']>
+  rentals?: Maybe<Rentals_Arr_Rel_Insert_Input>
+  title?: Maybe<Scalars['String']>
+}
+
+/** aggregate max on columns */
+export type Furniture_Max_Fields = {
+  __typename?: 'furniture_max_fields'
+  id?: Maybe<Scalars['Int']>
+  title?: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export type Furniture_Min_Fields = {
+  __typename?: 'furniture_min_fields'
+  id?: Maybe<Scalars['Int']>
+  title?: Maybe<Scalars['String']>
+}
+
+/** response of any mutation on the table "furniture" */
+export type Furniture_Mutation_Response = {
+  __typename?: 'furniture_mutation_response'
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Furniture>
+}
+
+/** input type for inserting object relation for remote table "furniture" */
+export type Furniture_Obj_Rel_Insert_Input = {
+  data: Furniture_Insert_Input
+  /** on conflict condition */
+  on_conflict?: Maybe<Furniture_On_Conflict>
+}
+
+/** on conflict condition type for table "furniture" */
+export type Furniture_On_Conflict = {
+  constraint: Furniture_Constraint
+  update_columns?: Array<Furniture_Update_Column>
+  where?: Maybe<Furniture_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "furniture". */
+export type Furniture_Order_By = {
+  id?: Maybe<Order_By>
+  rentals_aggregate?: Maybe<Rentals_Aggregate_Order_By>
+  title?: Maybe<Order_By>
+}
+
+/** primary key columns input for table: furniture */
+export type Furniture_Pk_Columns_Input = {
+  id: Scalars['Int']
+}
+
+/** select columns of table "furniture" */
+export enum Furniture_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+}
+
+/** input type for updating data in table "furniture" */
+export type Furniture_Set_Input = {
+  id?: Maybe<Scalars['Int']>
+  title?: Maybe<Scalars['String']>
+}
+
+/** aggregate stddev on columns */
+export type Furniture_Stddev_Fields = {
+  __typename?: 'furniture_stddev_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Furniture_Stddev_Pop_Fields = {
+  __typename?: 'furniture_stddev_pop_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Furniture_Stddev_Samp_Fields = {
+  __typename?: 'furniture_stddev_samp_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate sum on columns */
+export type Furniture_Sum_Fields = {
+  __typename?: 'furniture_sum_fields'
+  id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "furniture" */
+export enum Furniture_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+}
+
+/** aggregate var_pop on columns */
+export type Furniture_Var_Pop_Fields = {
+  __typename?: 'furniture_var_pop_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type Furniture_Var_Samp_Fields = {
+  __typename?: 'furniture_var_samp_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type Furniture_Variance_Fields = {
+  __typename?: 'furniture_variance_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root'
+  /** delete data from the table: "furniture" */
+  delete_furniture?: Maybe<Furniture_Mutation_Response>
+  /** delete single row from the table: "furniture" */
+  delete_furniture_by_pk?: Maybe<Furniture>
+  /** delete data from the table: "property_types" */
+  delete_property_types?: Maybe<Property_Types_Mutation_Response>
+  /** delete single row from the table: "property_types" */
+  delete_property_types_by_pk?: Maybe<Property_Types>
+  /** delete data from the table: "rentals" */
+  delete_rentals?: Maybe<Rentals_Mutation_Response>
+  /** delete single row from the table: "rentals" */
+  delete_rentals_by_pk?: Maybe<Rentals>
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>
+  /** insert data into the table: "furniture" */
+  insert_furniture?: Maybe<Furniture_Mutation_Response>
+  /** insert a single row into the table: "furniture" */
+  insert_furniture_one?: Maybe<Furniture>
+  /** insert data into the table: "property_types" */
+  insert_property_types?: Maybe<Property_Types_Mutation_Response>
+  /** insert a single row into the table: "property_types" */
+  insert_property_types_one?: Maybe<Property_Types>
+  /** insert data into the table: "rentals" */
+  insert_rentals?: Maybe<Rentals_Mutation_Response>
+  /** insert a single row into the table: "rentals" */
+  insert_rentals_one?: Maybe<Rentals>
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>
   submitDoneTask?: Maybe<SubmitDoneTaskRes>
+  /** update data of the table: "furniture" */
+  update_furniture?: Maybe<Furniture_Mutation_Response>
+  /** update single row of the table: "furniture" */
+  update_furniture_by_pk?: Maybe<Furniture>
+  /** update data of the table: "property_types" */
+  update_property_types?: Maybe<Property_Types_Mutation_Response>
+  /** update single row of the table: "property_types" */
+  update_property_types_by_pk?: Maybe<Property_Types>
+  /** update data of the table: "rentals" */
+  update_rentals?: Maybe<Rentals_Mutation_Response>
+  /** update single row of the table: "rentals" */
+  update_rentals_by_pk?: Maybe<Rentals>
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>
   /** update single row of the table: "users" */
   update_users_by_pk?: Maybe<Users>
   userSetup?: Maybe<UserSetupRes>
+}
+
+/** mutation root */
+export type Mutation_RootDelete_FurnitureArgs = {
+  where: Furniture_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Furniture_By_PkArgs = {
+  id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Property_TypesArgs = {
+  where: Property_Types_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Property_Types_By_PkArgs = {
+  id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_RentalsArgs = {
+  where: Rentals_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Rentals_By_PkArgs = {
+  id: Scalars['String']
 }
 
 /** mutation root */
@@ -105,6 +389,42 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['String']
+}
+
+/** mutation root */
+export type Mutation_RootInsert_FurnitureArgs = {
+  objects: Array<Furniture_Insert_Input>
+  on_conflict?: Maybe<Furniture_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Furniture_OneArgs = {
+  object: Furniture_Insert_Input
+  on_conflict?: Maybe<Furniture_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Property_TypesArgs = {
+  objects: Array<Property_Types_Insert_Input>
+  on_conflict?: Maybe<Property_Types_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Property_Types_OneArgs = {
+  object: Property_Types_Insert_Input
+  on_conflict?: Maybe<Property_Types_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_RentalsArgs = {
+  objects: Array<Rentals_Insert_Input>
+  on_conflict?: Maybe<Rentals_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Rentals_OneArgs = {
+  object: Rentals_Insert_Input
+  on_conflict?: Maybe<Rentals_On_Conflict>
 }
 
 /** mutation root */
@@ -122,6 +442,48 @@ export type Mutation_RootInsert_Users_OneArgs = {
 /** mutation root */
 export type Mutation_RootSubmitDoneTaskArgs = {
   input: SubmitDoneTaskInput
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_FurnitureArgs = {
+  _inc?: Maybe<Furniture_Inc_Input>
+  _set?: Maybe<Furniture_Set_Input>
+  where: Furniture_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Furniture_By_PkArgs = {
+  _inc?: Maybe<Furniture_Inc_Input>
+  _set?: Maybe<Furniture_Set_Input>
+  pk_columns: Furniture_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Property_TypesArgs = {
+  _inc?: Maybe<Property_Types_Inc_Input>
+  _set?: Maybe<Property_Types_Set_Input>
+  where: Property_Types_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Property_Types_By_PkArgs = {
+  _inc?: Maybe<Property_Types_Inc_Input>
+  _set?: Maybe<Property_Types_Set_Input>
+  pk_columns: Property_Types_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_RentalsArgs = {
+  _inc?: Maybe<Rentals_Inc_Input>
+  _set?: Maybe<Rentals_Set_Input>
+  where: Rentals_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Rentals_By_PkArgs = {
+  _inc?: Maybe<Rentals_Inc_Input>
+  _set?: Maybe<Rentals_Set_Input>
+  pk_columns: Rentals_Pk_Columns_Input
 }
 
 /** mutation root */
@@ -157,14 +519,297 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last',
 }
 
+/** columns and relationships of "property_types" */
+export type Property_Types = {
+  __typename?: 'property_types'
+  id: Scalars['Int']
+  /** fetch data from the table: "rentals" */
+  rentals: Array<Rentals>
+  /** An aggregate relationship */
+  rentals_aggregate: Rentals_Aggregate
+  title: Scalars['String']
+}
+
+/** columns and relationships of "property_types" */
+export type Property_TypesRentalsArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+/** columns and relationships of "property_types" */
+export type Property_TypesRentals_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+/** aggregated selection of "property_types" */
+export type Property_Types_Aggregate = {
+  __typename?: 'property_types_aggregate'
+  aggregate?: Maybe<Property_Types_Aggregate_Fields>
+  nodes: Array<Property_Types>
+}
+
+/** aggregate fields of "property_types" */
+export type Property_Types_Aggregate_Fields = {
+  __typename?: 'property_types_aggregate_fields'
+  avg?: Maybe<Property_Types_Avg_Fields>
+  count: Scalars['Int']
+  max?: Maybe<Property_Types_Max_Fields>
+  min?: Maybe<Property_Types_Min_Fields>
+  stddev?: Maybe<Property_Types_Stddev_Fields>
+  stddev_pop?: Maybe<Property_Types_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Property_Types_Stddev_Samp_Fields>
+  sum?: Maybe<Property_Types_Sum_Fields>
+  var_pop?: Maybe<Property_Types_Var_Pop_Fields>
+  var_samp?: Maybe<Property_Types_Var_Samp_Fields>
+  variance?: Maybe<Property_Types_Variance_Fields>
+}
+
+/** aggregate fields of "property_types" */
+export type Property_Types_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Property_Types_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type Property_Types_Avg_Fields = {
+  __typename?: 'property_types_avg_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "property_types". All fields are combined with a logical 'AND'. */
+export type Property_Types_Bool_Exp = {
+  _and?: Maybe<Array<Property_Types_Bool_Exp>>
+  _not?: Maybe<Property_Types_Bool_Exp>
+  _or?: Maybe<Array<Property_Types_Bool_Exp>>
+  id?: Maybe<Int_Comparison_Exp>
+  rentals?: Maybe<Rentals_Bool_Exp>
+  title?: Maybe<String_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "property_types" */
+export enum Property_Types_Constraint {
+  /** unique or primary key constraint */
+  PropertyTypesPkey = 'property_types_pkey',
+}
+
+/** input type for incrementing numeric columns in table "property_types" */
+export type Property_Types_Inc_Input = {
+  id?: Maybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "property_types" */
+export type Property_Types_Insert_Input = {
+  id?: Maybe<Scalars['Int']>
+  rentals?: Maybe<Rentals_Arr_Rel_Insert_Input>
+  title?: Maybe<Scalars['String']>
+}
+
+/** aggregate max on columns */
+export type Property_Types_Max_Fields = {
+  __typename?: 'property_types_max_fields'
+  id?: Maybe<Scalars['Int']>
+  title?: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export type Property_Types_Min_Fields = {
+  __typename?: 'property_types_min_fields'
+  id?: Maybe<Scalars['Int']>
+  title?: Maybe<Scalars['String']>
+}
+
+/** response of any mutation on the table "property_types" */
+export type Property_Types_Mutation_Response = {
+  __typename?: 'property_types_mutation_response'
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Property_Types>
+}
+
+/** input type for inserting object relation for remote table "property_types" */
+export type Property_Types_Obj_Rel_Insert_Input = {
+  data: Property_Types_Insert_Input
+  /** on conflict condition */
+  on_conflict?: Maybe<Property_Types_On_Conflict>
+}
+
+/** on conflict condition type for table "property_types" */
+export type Property_Types_On_Conflict = {
+  constraint: Property_Types_Constraint
+  update_columns?: Array<Property_Types_Update_Column>
+  where?: Maybe<Property_Types_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "property_types". */
+export type Property_Types_Order_By = {
+  id?: Maybe<Order_By>
+  rentals_aggregate?: Maybe<Rentals_Aggregate_Order_By>
+  title?: Maybe<Order_By>
+}
+
+/** primary key columns input for table: property_types */
+export type Property_Types_Pk_Columns_Input = {
+  id: Scalars['Int']
+}
+
+/** select columns of table "property_types" */
+export enum Property_Types_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+}
+
+/** input type for updating data in table "property_types" */
+export type Property_Types_Set_Input = {
+  id?: Maybe<Scalars['Int']>
+  title?: Maybe<Scalars['String']>
+}
+
+/** aggregate stddev on columns */
+export type Property_Types_Stddev_Fields = {
+  __typename?: 'property_types_stddev_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Property_Types_Stddev_Pop_Fields = {
+  __typename?: 'property_types_stddev_pop_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Property_Types_Stddev_Samp_Fields = {
+  __typename?: 'property_types_stddev_samp_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate sum on columns */
+export type Property_Types_Sum_Fields = {
+  __typename?: 'property_types_sum_fields'
+  id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "property_types" */
+export enum Property_Types_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+}
+
+/** aggregate var_pop on columns */
+export type Property_Types_Var_Pop_Fields = {
+  __typename?: 'property_types_var_pop_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type Property_Types_Var_Samp_Fields = {
+  __typename?: 'property_types_var_samp_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type Property_Types_Variance_Fields = {
+  __typename?: 'property_types_variance_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
 export type Query_Root = {
   __typename?: 'query_root'
+  /** fetch data from the table: "furniture" */
+  furniture: Array<Furniture>
+  /** fetch aggregated fields from the table: "furniture" */
+  furniture_aggregate: Furniture_Aggregate
+  /** fetch data from the table: "furniture" using primary key columns */
+  furniture_by_pk?: Maybe<Furniture>
+  /** fetch data from the table: "property_types" */
+  property_types: Array<Property_Types>
+  /** fetch aggregated fields from the table: "property_types" */
+  property_types_aggregate: Property_Types_Aggregate
+  /** fetch data from the table: "property_types" using primary key columns */
+  property_types_by_pk?: Maybe<Property_Types>
+  /** fetch data from the table: "rentals" */
+  rentals: Array<Rentals>
+  /** An aggregate relationship */
+  rentals_aggregate: Rentals_Aggregate
+  /** fetch data from the table: "rentals" using primary key columns */
+  rentals_by_pk?: Maybe<Rentals>
   /** fetch data from the table: "users" */
   users: Array<Users>
   /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>
+}
+
+export type Query_RootFurnitureArgs = {
+  distinct_on?: Maybe<Array<Furniture_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Furniture_Order_By>>
+  where?: Maybe<Furniture_Bool_Exp>
+}
+
+export type Query_RootFurniture_AggregateArgs = {
+  distinct_on?: Maybe<Array<Furniture_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Furniture_Order_By>>
+  where?: Maybe<Furniture_Bool_Exp>
+}
+
+export type Query_RootFurniture_By_PkArgs = {
+  id: Scalars['Int']
+}
+
+export type Query_RootProperty_TypesArgs = {
+  distinct_on?: Maybe<Array<Property_Types_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Types_Order_By>>
+  where?: Maybe<Property_Types_Bool_Exp>
+}
+
+export type Query_RootProperty_Types_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Types_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Types_Order_By>>
+  where?: Maybe<Property_Types_Bool_Exp>
+}
+
+export type Query_RootProperty_Types_By_PkArgs = {
+  id: Scalars['Int']
+}
+
+export type Query_RootRentalsArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+export type Query_RootRentals_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+export type Query_RootRentals_By_PkArgs = {
+  id: Scalars['String']
 }
 
 export type Query_RootUsersArgs = {
@@ -187,14 +832,539 @@ export type Query_RootUsers_By_PkArgs = {
   id: Scalars['String']
 }
 
+/** columns and relationships of "rentals" */
+export type Rentals = {
+  __typename?: 'rentals'
+  area: Scalars['Int']
+  bedroom: Scalars['Int']
+  description: Scalars['String']
+  /** An object relationship */
+  furniture?: Maybe<Furniture>
+  furnitureId?: Maybe<Scalars['Int']>
+  id: Scalars['String']
+  location: Scalars['String']
+  price: Scalars['Int']
+  /** An object relationship */
+  property: Property_Types
+  /** An object relationship */
+  reporter: Users
+  reporterId: Scalars['String']
+  thumbnail?: Maybe<Scalars['String']>
+  title: Scalars['String']
+  typeId: Scalars['Int']
+}
+
+/** aggregated selection of "rentals" */
+export type Rentals_Aggregate = {
+  __typename?: 'rentals_aggregate'
+  aggregate?: Maybe<Rentals_Aggregate_Fields>
+  nodes: Array<Rentals>
+}
+
+/** aggregate fields of "rentals" */
+export type Rentals_Aggregate_Fields = {
+  __typename?: 'rentals_aggregate_fields'
+  avg?: Maybe<Rentals_Avg_Fields>
+  count: Scalars['Int']
+  max?: Maybe<Rentals_Max_Fields>
+  min?: Maybe<Rentals_Min_Fields>
+  stddev?: Maybe<Rentals_Stddev_Fields>
+  stddev_pop?: Maybe<Rentals_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Rentals_Stddev_Samp_Fields>
+  sum?: Maybe<Rentals_Sum_Fields>
+  var_pop?: Maybe<Rentals_Var_Pop_Fields>
+  var_samp?: Maybe<Rentals_Var_Samp_Fields>
+  variance?: Maybe<Rentals_Variance_Fields>
+}
+
+/** aggregate fields of "rentals" */
+export type Rentals_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Rentals_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "rentals" */
+export type Rentals_Aggregate_Order_By = {
+  avg?: Maybe<Rentals_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Rentals_Max_Order_By>
+  min?: Maybe<Rentals_Min_Order_By>
+  stddev?: Maybe<Rentals_Stddev_Order_By>
+  stddev_pop?: Maybe<Rentals_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Rentals_Stddev_Samp_Order_By>
+  sum?: Maybe<Rentals_Sum_Order_By>
+  var_pop?: Maybe<Rentals_Var_Pop_Order_By>
+  var_samp?: Maybe<Rentals_Var_Samp_Order_By>
+  variance?: Maybe<Rentals_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "rentals" */
+export type Rentals_Arr_Rel_Insert_Input = {
+  data: Array<Rentals_Insert_Input>
+  /** on conflict condition */
+  on_conflict?: Maybe<Rentals_On_Conflict>
+}
+
+/** aggregate avg on columns */
+export type Rentals_Avg_Fields = {
+  __typename?: 'rentals_avg_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "rentals" */
+export type Rentals_Avg_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** Boolean expression to filter rows from the table "rentals". All fields are combined with a logical 'AND'. */
+export type Rentals_Bool_Exp = {
+  _and?: Maybe<Array<Rentals_Bool_Exp>>
+  _not?: Maybe<Rentals_Bool_Exp>
+  _or?: Maybe<Array<Rentals_Bool_Exp>>
+  area?: Maybe<Int_Comparison_Exp>
+  bedroom?: Maybe<Int_Comparison_Exp>
+  description?: Maybe<String_Comparison_Exp>
+  furniture?: Maybe<Furniture_Bool_Exp>
+  furnitureId?: Maybe<Int_Comparison_Exp>
+  id?: Maybe<String_Comparison_Exp>
+  location?: Maybe<String_Comparison_Exp>
+  price?: Maybe<Int_Comparison_Exp>
+  property?: Maybe<Property_Types_Bool_Exp>
+  reporter?: Maybe<Users_Bool_Exp>
+  reporterId?: Maybe<String_Comparison_Exp>
+  thumbnail?: Maybe<String_Comparison_Exp>
+  title?: Maybe<String_Comparison_Exp>
+  typeId?: Maybe<Int_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "rentals" */
+export enum Rentals_Constraint {
+  /** unique or primary key constraint */
+  RentalsPkey = 'rentals_pkey',
+}
+
+/** input type for incrementing numeric columns in table "rentals" */
+export type Rentals_Inc_Input = {
+  area?: Maybe<Scalars['Int']>
+  bedroom?: Maybe<Scalars['Int']>
+  furnitureId?: Maybe<Scalars['Int']>
+  price?: Maybe<Scalars['Int']>
+  typeId?: Maybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "rentals" */
+export type Rentals_Insert_Input = {
+  area?: Maybe<Scalars['Int']>
+  bedroom?: Maybe<Scalars['Int']>
+  description?: Maybe<Scalars['String']>
+  furniture?: Maybe<Furniture_Obj_Rel_Insert_Input>
+  furnitureId?: Maybe<Scalars['Int']>
+  id?: Maybe<Scalars['String']>
+  location?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Int']>
+  property?: Maybe<Property_Types_Obj_Rel_Insert_Input>
+  reporter?: Maybe<Users_Obj_Rel_Insert_Input>
+  reporterId?: Maybe<Scalars['String']>
+  thumbnail?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  typeId?: Maybe<Scalars['Int']>
+}
+
+/** aggregate max on columns */
+export type Rentals_Max_Fields = {
+  __typename?: 'rentals_max_fields'
+  area?: Maybe<Scalars['Int']>
+  bedroom?: Maybe<Scalars['Int']>
+  description?: Maybe<Scalars['String']>
+  furnitureId?: Maybe<Scalars['Int']>
+  id?: Maybe<Scalars['String']>
+  location?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Int']>
+  reporterId?: Maybe<Scalars['String']>
+  thumbnail?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  typeId?: Maybe<Scalars['Int']>
+}
+
+/** order by max() on columns of table "rentals" */
+export type Rentals_Max_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  description?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  id?: Maybe<Order_By>
+  location?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  reporterId?: Maybe<Order_By>
+  thumbnail?: Maybe<Order_By>
+  title?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type Rentals_Min_Fields = {
+  __typename?: 'rentals_min_fields'
+  area?: Maybe<Scalars['Int']>
+  bedroom?: Maybe<Scalars['Int']>
+  description?: Maybe<Scalars['String']>
+  furnitureId?: Maybe<Scalars['Int']>
+  id?: Maybe<Scalars['String']>
+  location?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Int']>
+  reporterId?: Maybe<Scalars['String']>
+  thumbnail?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  typeId?: Maybe<Scalars['Int']>
+}
+
+/** order by min() on columns of table "rentals" */
+export type Rentals_Min_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  description?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  id?: Maybe<Order_By>
+  location?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  reporterId?: Maybe<Order_By>
+  thumbnail?: Maybe<Order_By>
+  title?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** response of any mutation on the table "rentals" */
+export type Rentals_Mutation_Response = {
+  __typename?: 'rentals_mutation_response'
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Rentals>
+}
+
+/** on conflict condition type for table "rentals" */
+export type Rentals_On_Conflict = {
+  constraint: Rentals_Constraint
+  update_columns?: Array<Rentals_Update_Column>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "rentals". */
+export type Rentals_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  description?: Maybe<Order_By>
+  furniture?: Maybe<Furniture_Order_By>
+  furnitureId?: Maybe<Order_By>
+  id?: Maybe<Order_By>
+  location?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  property?: Maybe<Property_Types_Order_By>
+  reporter?: Maybe<Users_Order_By>
+  reporterId?: Maybe<Order_By>
+  thumbnail?: Maybe<Order_By>
+  title?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** primary key columns input for table: rentals */
+export type Rentals_Pk_Columns_Input = {
+  id: Scalars['String']
+}
+
+/** select columns of table "rentals" */
+export enum Rentals_Select_Column {
+  /** column name */
+  Area = 'area',
+  /** column name */
+  Bedroom = 'bedroom',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  FurnitureId = 'furnitureId',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Price = 'price',
+  /** column name */
+  ReporterId = 'reporterId',
+  /** column name */
+  Thumbnail = 'thumbnail',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  TypeId = 'typeId',
+}
+
+/** input type for updating data in table "rentals" */
+export type Rentals_Set_Input = {
+  area?: Maybe<Scalars['Int']>
+  bedroom?: Maybe<Scalars['Int']>
+  description?: Maybe<Scalars['String']>
+  furnitureId?: Maybe<Scalars['Int']>
+  id?: Maybe<Scalars['String']>
+  location?: Maybe<Scalars['String']>
+  price?: Maybe<Scalars['Int']>
+  reporterId?: Maybe<Scalars['String']>
+  thumbnail?: Maybe<Scalars['String']>
+  title?: Maybe<Scalars['String']>
+  typeId?: Maybe<Scalars['Int']>
+}
+
+/** aggregate stddev on columns */
+export type Rentals_Stddev_Fields = {
+  __typename?: 'rentals_stddev_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "rentals" */
+export type Rentals_Stddev_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** aggregate stddev_pop on columns */
+export type Rentals_Stddev_Pop_Fields = {
+  __typename?: 'rentals_stddev_pop_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "rentals" */
+export type Rentals_Stddev_Pop_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** aggregate stddev_samp on columns */
+export type Rentals_Stddev_Samp_Fields = {
+  __typename?: 'rentals_stddev_samp_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "rentals" */
+export type Rentals_Stddev_Samp_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** aggregate sum on columns */
+export type Rentals_Sum_Fields = {
+  __typename?: 'rentals_sum_fields'
+  area?: Maybe<Scalars['Int']>
+  bedroom?: Maybe<Scalars['Int']>
+  furnitureId?: Maybe<Scalars['Int']>
+  price?: Maybe<Scalars['Int']>
+  typeId?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "rentals" */
+export type Rentals_Sum_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** update columns of table "rentals" */
+export enum Rentals_Update_Column {
+  /** column name */
+  Area = 'area',
+  /** column name */
+  Bedroom = 'bedroom',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  FurnitureId = 'furnitureId',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Price = 'price',
+  /** column name */
+  ReporterId = 'reporterId',
+  /** column name */
+  Thumbnail = 'thumbnail',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  TypeId = 'typeId',
+}
+
+/** aggregate var_pop on columns */
+export type Rentals_Var_Pop_Fields = {
+  __typename?: 'rentals_var_pop_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "rentals" */
+export type Rentals_Var_Pop_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** aggregate var_samp on columns */
+export type Rentals_Var_Samp_Fields = {
+  __typename?: 'rentals_var_samp_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "rentals" */
+export type Rentals_Var_Samp_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
+/** aggregate variance on columns */
+export type Rentals_Variance_Fields = {
+  __typename?: 'rentals_variance_fields'
+  area?: Maybe<Scalars['Float']>
+  bedroom?: Maybe<Scalars['Float']>
+  furnitureId?: Maybe<Scalars['Float']>
+  price?: Maybe<Scalars['Float']>
+  typeId?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "rentals" */
+export type Rentals_Variance_Order_By = {
+  area?: Maybe<Order_By>
+  bedroom?: Maybe<Order_By>
+  furnitureId?: Maybe<Order_By>
+  price?: Maybe<Order_By>
+  typeId?: Maybe<Order_By>
+}
+
 export type Subscription_Root = {
   __typename?: 'subscription_root'
+  /** fetch data from the table: "furniture" */
+  furniture: Array<Furniture>
+  /** fetch aggregated fields from the table: "furniture" */
+  furniture_aggregate: Furniture_Aggregate
+  /** fetch data from the table: "furniture" using primary key columns */
+  furniture_by_pk?: Maybe<Furniture>
+  /** fetch data from the table: "property_types" */
+  property_types: Array<Property_Types>
+  /** fetch aggregated fields from the table: "property_types" */
+  property_types_aggregate: Property_Types_Aggregate
+  /** fetch data from the table: "property_types" using primary key columns */
+  property_types_by_pk?: Maybe<Property_Types>
+  /** fetch data from the table: "rentals" */
+  rentals: Array<Rentals>
+  /** An aggregate relationship */
+  rentals_aggregate: Rentals_Aggregate
+  /** fetch data from the table: "rentals" using primary key columns */
+  rentals_by_pk?: Maybe<Rentals>
   /** fetch data from the table: "users" */
   users: Array<Users>
   /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>
+}
+
+export type Subscription_RootFurnitureArgs = {
+  distinct_on?: Maybe<Array<Furniture_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Furniture_Order_By>>
+  where?: Maybe<Furniture_Bool_Exp>
+}
+
+export type Subscription_RootFurniture_AggregateArgs = {
+  distinct_on?: Maybe<Array<Furniture_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Furniture_Order_By>>
+  where?: Maybe<Furniture_Bool_Exp>
+}
+
+export type Subscription_RootFurniture_By_PkArgs = {
+  id: Scalars['Int']
+}
+
+export type Subscription_RootProperty_TypesArgs = {
+  distinct_on?: Maybe<Array<Property_Types_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Types_Order_By>>
+  where?: Maybe<Property_Types_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Types_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Types_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Types_Order_By>>
+  where?: Maybe<Property_Types_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Types_By_PkArgs = {
+  id: Scalars['Int']
+}
+
+export type Subscription_RootRentalsArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+export type Subscription_RootRentals_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+export type Subscription_RootRentals_By_PkArgs = {
+  id: Scalars['String']
 }
 
 export type Subscription_RootUsersArgs = {
@@ -327,6 +1497,13 @@ export type Users_Mutation_Response = {
   affected_rows: Scalars['Int']
   /** data from the rows affected by the mutation */
   returning: Array<Users>
+}
+
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input
+  /** on conflict condition */
+  on_conflict?: Maybe<Users_On_Conflict>
 }
 
 /** on conflict condition type for table "users" */

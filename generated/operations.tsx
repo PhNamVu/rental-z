@@ -1,5 +1,21 @@
 import * as Types from './schemas'
 
+export type PostRentalMutationVariables = Types.Exact<{
+  object: Types.Rentals_Insert_Input
+}>
+
+export type PostRentalMutation = {
+  __typename?: 'mutation_root'
+  insert_rentals?:
+    | {
+        __typename?: 'rentals_mutation_response'
+        affected_rows: number
+        returning: Array<{ __typename?: 'rentals'; id: string }>
+      }
+    | null
+    | undefined
+}
+
 export type UsersQueryVariables = Types.Exact<{
   id?: Types.Maybe<Types.Scalars['String']>
 }>

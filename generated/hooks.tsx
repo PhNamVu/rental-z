@@ -4,6 +4,59 @@ import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
 const defaultOptions = {}
 
+export const PostRentalDocument = gql`
+  mutation postRental($object: rentals_insert_input!) {
+    insert_rentals(objects: [$object]) {
+      affected_rows
+      returning {
+        id
+      }
+    }
+  }
+`
+export type PostRentalMutationFn = Apollo.MutationFunction<
+  Types.PostRentalMutation,
+  Types.PostRentalMutationVariables
+>
+
+/**
+ * __usePostRentalMutation__
+ *
+ * To run a mutation, you first call `usePostRentalMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePostRentalMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [postRentalMutation, { data, loading, error }] = usePostRentalMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function usePostRentalMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.PostRentalMutation,
+    Types.PostRentalMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    Types.PostRentalMutation,
+    Types.PostRentalMutationVariables
+  >(PostRentalDocument, options)
+}
+export type PostRentalMutationHookResult = ReturnType<
+  typeof usePostRentalMutation
+>
+export type PostRentalMutationResult =
+  Apollo.MutationResult<Types.PostRentalMutation>
+export type PostRentalMutationOptions = Apollo.BaseMutationOptions<
+  Types.PostRentalMutation,
+  Types.PostRentalMutationVariables
+>
 export const UsersDocument = gql`
   query users($id: String) {
     users(where: { id: { _eq: $id } }) {

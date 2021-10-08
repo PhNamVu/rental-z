@@ -54,3 +54,9 @@ export type AuthTabParamList = {
   TabLogin: undefined
   TabSignUp: undefined
 }
+
+export type TabSettingParamList = {
+  SettingScreen: undefined
+  MyUploadScreen: undefined
+  UploadRentalScreen: undefined
+}
