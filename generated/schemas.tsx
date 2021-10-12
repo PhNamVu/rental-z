@@ -835,22 +835,22 @@ export type Query_RootUsers_By_PkArgs = {
 /** columns and relationships of "rentals" */
 export type Rentals = {
   __typename?: 'rentals'
-  area: Scalars['Int']
+  area?: Maybe<Scalars['Int']>
   bedroom: Scalars['Int']
-  description: Scalars['String']
+  description?: Maybe<Scalars['String']>
   /** An object relationship */
   furniture?: Maybe<Furniture>
   furnitureId?: Maybe<Scalars['Int']>
   id: Scalars['String']
   location: Scalars['String']
-  price: Scalars['Int']
+  price?: Maybe<Scalars['Int']>
   /** An object relationship */
   property: Property_Types
   /** An object relationship */
-  reporter: Users
-  reporterId: Scalars['String']
+  reporter?: Maybe<Users>
+  reporterId?: Maybe<Scalars['String']>
   thumbnail?: Maybe<Scalars['String']>
-  title: Scalars['String']
+  title?: Maybe<Scalars['String']>
   typeId: Scalars['Int']
 }
 
@@ -1408,8 +1408,30 @@ export type Users = {
   firstName?: Maybe<Scalars['String']>
   id: Scalars['String']
   lastName?: Maybe<Scalars['String']>
+  /** fetch data from the table: "rentals" */
+  rentals: Array<Rentals>
+  /** An aggregate relationship */
+  rentals_aggregate: Rentals_Aggregate
   role: Scalars['String']
   status?: Maybe<Scalars['String']>
+}
+
+/** columns and relationships of "users" */
+export type UsersRentalsArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
+}
+
+/** columns and relationships of "users" */
+export type UsersRentals_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rentals_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rentals_Order_By>>
+  where?: Maybe<Rentals_Bool_Exp>
 }
 
 /** aggregated selection of "users" */
@@ -1443,6 +1465,7 @@ export type Users_Bool_Exp = {
   firstName?: Maybe<String_Comparison_Exp>
   id?: Maybe<String_Comparison_Exp>
   lastName?: Maybe<String_Comparison_Exp>
+  rentals?: Maybe<Rentals_Bool_Exp>
   role?: Maybe<String_Comparison_Exp>
   status?: Maybe<String_Comparison_Exp>
 }
@@ -1462,6 +1485,7 @@ export type Users_Insert_Input = {
   firstName?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
   lastName?: Maybe<Scalars['String']>
+  rentals?: Maybe<Rentals_Arr_Rel_Insert_Input>
   role?: Maybe<Scalars['String']>
   status?: Maybe<Scalars['String']>
 }
@@ -1520,6 +1544,7 @@ export type Users_Order_By = {
   firstName?: Maybe<Order_By>
   id?: Maybe<Order_By>
   lastName?: Maybe<Order_By>
+  rentals_aggregate?: Maybe<Rentals_Aggregate_Order_By>
   role?: Maybe<Order_By>
   status?: Maybe<Order_By>
 }

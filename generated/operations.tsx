@@ -7,11 +7,7 @@ export type PostRentalMutationVariables = Types.Exact<{
 export type PostRentalMutation = {
   __typename?: 'mutation_root'
   insert_rentals?:
-    | {
-        __typename?: 'rentals_mutation_response'
-        affected_rows: number
-        returning: Array<{ __typename?: 'rentals'; id: string }>
-      }
+    | { __typename?: 'rentals_mutation_response'; affected_rows: number }
     | null
     | undefined
 }

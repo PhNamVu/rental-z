@@ -7,17 +7,14 @@ export function createClient(state: any) {
   let role: string
   let isUserLoggedin: boolean
 
-  if (!state?.user) {
+  if (state?.user) {
+    client = createAuthApolloClient(state.user)
+    role = 'user'
+    isUserLoggedin = true
+  } else {
     client = createUnAuthClient()
     role = 'nonUser'
     isUserLoggedin = false
-  } else {
-    client = createAuthApolloClient(state?.user)
-    role =
-      state?.customClaims?.claims['https://hasura.io/jwt/claims'][
-        'x-hasura-default-role'
-      ] || 'anonymous'
-    isUserLoggedin = true
   }
   return [client, role, isUserLoggedin]
 }

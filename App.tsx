@@ -12,7 +12,7 @@ import { ProvideAuth, useAuth } from './hooks/useAuth'
 import { createClient } from './apollo/create-client'
 
 export default function App() {
-  const { state, signout }: any = useAuth()
+  const { state }: any = useAuth()
   const [client] = createClient(state)
   const isLoadingComplete = useCachedResources()
   const newColorTheme = {

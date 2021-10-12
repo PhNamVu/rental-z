@@ -8,9 +8,6 @@ export const PostRentalDocument = gql`
   mutation postRental($object: rentals_insert_input!) {
     insert_rentals(objects: [$object]) {
       affected_rows
-      returning {
-        id
-      }
     }
   }
 `

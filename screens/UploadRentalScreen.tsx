@@ -26,7 +26,9 @@ export interface LoginForm {
 }
 
 const UploadRentalScreen = () => {
-  const { state }: any = useAuth()
+  const {
+    state: { user },
+  }: any = useAuth()
 
   const [postRental] = usePostRentalMutation()
 
@@ -35,16 +37,19 @@ const UploadRentalScreen = () => {
       await postRental({
         variables: {
           object: {
-            title: 'bitch',
-            price: 100,
-            area: 500,
-            bedroom: 2,
-            location: 'bitch',
-            description: 'bitch',
-            typeId: 1,
+            title: values.title,
+            price: parseInt(values.price),
+            area: parseInt(values.area),
+            bedroom: parseInt(values.bedroom),
+            location: values.location,
+            description: values.description,
+            typeId: parseInt(values.typeId),
+            furnitureId: parseInt(values.furnitureId),
+            reporterId: user.uid,
           },
         },
       })
+
       positiveToast('Post Successful')
     } catch (error) {
       negativeToast('Fail')
@@ -228,7 +233,7 @@ const UploadRentalScreen = () => {
                   mt={5}
                   isLoading={isSubmitting}
                   color="#3740FE"
-                  //   disabled={!isValid}
+                  disabled={!isValid}
                   onPress={() => handleSubmit(values)}
                 >
                   Create
