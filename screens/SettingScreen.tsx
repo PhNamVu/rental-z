@@ -23,7 +23,6 @@ const SettingScreen = () => {
   const navigation =
     useNavigation<StackNavigationProp<TabSettingParamList, 'SettingScreen'>>()
 
-  console.info(user)
   return (
     <VStack flex={1} justifyContent="flex-start" mt={20} mx={10}>
       <Box>

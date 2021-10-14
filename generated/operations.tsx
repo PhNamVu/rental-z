@@ -12,6 +12,40 @@ export type PostRentalMutation = {
     | undefined
 }
 
+export type MyUploadQueryVariables = Types.Exact<{
+  reporterId: Types.Scalars['String']
+}>
+
+export type MyUploadQuery = {
+  __typename?: 'query_root'
+  rentals: Array<{
+    __typename?: 'rentals'
+    id: string
+    location: string
+    price?: number | null | undefined
+    bedroom: number
+    area?: number | null | undefined
+    thumbnail?: string | null | undefined
+    title?: string | null | undefined
+  }>
+}
+
+export type DeleteRentalMutationVariables = Types.Exact<{
+  id: Types.Scalars['String']
+}>
+
+export type DeleteRentalMutation = {
+  __typename?: 'mutation_root'
+  delete_rentals?:
+    | {
+        __typename?: 'rentals_mutation_response'
+        affected_rows: number
+        returning: Array<{ __typename?: 'rentals'; id: string }>
+      }
+    | null
+    | undefined
+}
+
 export type UsersQueryVariables = Types.Exact<{
   id?: Types.Maybe<Types.Scalars['String']>
 }>

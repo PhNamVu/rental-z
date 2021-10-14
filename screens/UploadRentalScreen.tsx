@@ -46,6 +46,7 @@ const UploadRentalScreen = () => {
             typeId: parseInt(values.typeId),
             furnitureId: parseInt(values.furnitureId),
             reporterId: user.uid,
+            thumbnail: values.thumbnail,
           },
         },
       })

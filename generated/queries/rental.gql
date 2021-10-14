@@ -3,3 +3,24 @@ mutation postRental($object: rentals_insert_input!) {
     affected_rows
   }
 }
+
+query myUpload($reporterId: String!) {
+  rentals(where: { reporterId: { _eq: $reporterId } }) {
+    id
+    location
+    price
+    bedroom
+    area
+    thumbnail
+    title
+  }
+}
+
+mutation deleteRental($id: String!) {
+  delete_rentals(where: { id: { _eq: $id } }) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
