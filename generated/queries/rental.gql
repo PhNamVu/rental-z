@@ -24,3 +24,27 @@ mutation deleteRental($id: String!) {
     }
   }
 }
+
+query rentalDetail($id: String!) {
+  rentals(where: { id: { _eq: $id } }) {
+    id
+    location
+    price
+    bedroom
+    area
+    thumbnail
+    title
+    description
+    typeId
+    furnitureId
+  }
+}
+
+mutation updateRental($id: String, $object: rentals_set_input!) {
+  update_rentals(where: { id: { _eq: $id } }, _set: $object) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}

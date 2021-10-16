@@ -835,7 +835,7 @@ export type Query_RootUsers_By_PkArgs = {
 /** columns and relationships of "rentals" */
 export type Rentals = {
   __typename?: 'rentals'
-  area?: Maybe<Scalars['Int']>
+  area: Scalars['Int']
   bedroom: Scalars['Int']
   description?: Maybe<Scalars['String']>
   /** An object relationship */
@@ -843,14 +843,14 @@ export type Rentals = {
   furnitureId?: Maybe<Scalars['Int']>
   id: Scalars['String']
   location: Scalars['String']
-  price?: Maybe<Scalars['Int']>
+  price: Scalars['Int']
   /** An object relationship */
   property: Property_Types
   /** An object relationship */
   reporter?: Maybe<Users>
   reporterId?: Maybe<Scalars['String']>
-  thumbnail?: Maybe<Scalars['String']>
-  title?: Maybe<Scalars['String']>
+  thumbnail: Scalars['String']
+  title: Scalars['String']
   typeId: Scalars['Int']
 }
 

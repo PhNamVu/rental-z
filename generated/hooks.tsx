@@ -169,6 +169,127 @@ export type DeleteRentalMutationOptions = Apollo.BaseMutationOptions<
   Types.DeleteRentalMutation,
   Types.DeleteRentalMutationVariables
 >
+export const RentalDetailDocument = gql`
+  query rentalDetail($id: String!) {
+    rentals(where: { id: { _eq: $id } }) {
+      id
+      location
+      price
+      bedroom
+      area
+      thumbnail
+      title
+      description
+      typeId
+      furnitureId
+    }
+  }
+`
+
+/**
+ * __useRentalDetailQuery__
+ *
+ * To run a query within a React component, call `useRentalDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRentalDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRentalDetailQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRentalDetailQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    Types.RentalDetailQuery,
+    Types.RentalDetailQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    Types.RentalDetailQuery,
+    Types.RentalDetailQueryVariables
+  >(RentalDetailDocument, options)
+}
+export function useRentalDetailLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.RentalDetailQuery,
+    Types.RentalDetailQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    Types.RentalDetailQuery,
+    Types.RentalDetailQueryVariables
+  >(RentalDetailDocument, options)
+}
+export type RentalDetailQueryHookResult = ReturnType<
+  typeof useRentalDetailQuery
+>
+export type RentalDetailLazyQueryHookResult = ReturnType<
+  typeof useRentalDetailLazyQuery
+>
+export type RentalDetailQueryResult = Apollo.QueryResult<
+  Types.RentalDetailQuery,
+  Types.RentalDetailQueryVariables
+>
+export const UpdateRentalDocument = gql`
+  mutation updateRental($id: String, $object: rentals_set_input!) {
+    update_rentals(where: { id: { _eq: $id } }, _set: $object) {
+      affected_rows
+      returning {
+        id
+      }
+    }
+  }
+`
+export type UpdateRentalMutationFn = Apollo.MutationFunction<
+  Types.UpdateRentalMutation,
+  Types.UpdateRentalMutationVariables
+>
+
+/**
+ * __useUpdateRentalMutation__
+ *
+ * To run a mutation, you first call `useUpdateRentalMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateRentalMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateRentalMutation, { data, loading, error }] = useUpdateRentalMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useUpdateRentalMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.UpdateRentalMutation,
+    Types.UpdateRentalMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    Types.UpdateRentalMutation,
+    Types.UpdateRentalMutationVariables
+  >(UpdateRentalDocument, options)
+}
+export type UpdateRentalMutationHookResult = ReturnType<
+  typeof useUpdateRentalMutation
+>
+export type UpdateRentalMutationResult =
+  Apollo.MutationResult<Types.UpdateRentalMutation>
+export type UpdateRentalMutationOptions = Apollo.BaseMutationOptions<
+  Types.UpdateRentalMutation,
+  Types.UpdateRentalMutationVariables
+>
 export const UsersDocument = gql`
   query users($id: String) {
     users(where: { id: { _eq: $id } }) {

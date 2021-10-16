@@ -16,6 +16,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined
   Modal: undefined
   NotFound: undefined
+  UpdateRentalScreen: undefined
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -59,4 +60,5 @@ export type TabSettingParamList = {
   SettingScreen: undefined
   MyUploadScreen: undefined
   UploadRentalScreen: undefined
+  UpdateRentalScreen: undefined
 }

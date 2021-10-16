@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/native'
 import {
   Box,
   Text,
@@ -15,20 +16,33 @@ import { Formik } from 'formik'
 import { RentalSchemaValidation } from '../helpers/validation'
 import Colors from '../constants/Colors'
 import { negativeToast, positiveToast } from '../helpers/toaster'
-import { usePostRentalMutation } from '../generated/hooks'
+import {
+  useRentalDetailQuery,
+  useUpdateRentalMutation,
+} from '../generated/hooks'
 import { useAuth } from '../hooks/useAuth'
 
-const UploadRentalScreen = () => {
+const UpdateRentalScreen = () => {
+  const route = useRoute()
+  const { id }: any = route.params
+
   const {
     state: { user },
   }: any = useAuth()
+  const { data, loading } = useRentalDetailQuery({
+    variables: {
+      id,
+    },
+  })
+  const rental = data?.rentals[0]
 
-  const [postRental] = usePostRentalMutation()
+  const [updateRental] = useUpdateRentalMutation()
 
-  const handleSubmit = async (values: any, resetForm: any) => {
+  const handleSubmit = async (values: any) => {
     try {
-      await postRental({
+      await updateRental({
         variables: {
+          id,
           object: {
             title: values.title,
             price: parseInt(values.price),
@@ -43,14 +57,15 @@ const UploadRentalScreen = () => {
           },
         },
       })
-      resetForm()
 
-      positiveToast('Post Successful')
+      positiveToast('Update Successful')
     } catch (error) {
       negativeToast('Fail')
       console.error(error)
     }
   }
+
+  if (loading) return <Box> Loading</Box>
 
   return (
     <ScrollView>
@@ -62,21 +77,21 @@ const UploadRentalScreen = () => {
             fontWeight="bold"
             color={Colors.primary.text}
           >
-            Upload 🏠
+            Update 🏠
           </Text>
         </Box>
         <Box>
           <Formik
             initialValues={{
-              title: '',
-              thumbnail: '',
-              price: '',
-              area: '',
-              bedroom: '',
-              location: '',
-              description: '',
-              typeId: '',
-              furnitureId: '',
+              title: rental?.title,
+              thumbnail: rental?.thumbnail,
+              price: rental?.price ? `${rental.price}` : '',
+              area: rental?.area ? `${rental?.area}` : '',
+              bedroom: rental?.bedroom ? `${rental?.bedroom}` : '',
+              location: rental?.location,
+              description: rental?.description,
+              typeId: rental?.typeId ? `${rental?.typeId}` : '',
+              furnitureId: rental?.furnitureId ? `${rental?.furnitureId}` : '',
             }}
             onSubmit={(values) => {
               console.log('values', values)
@@ -84,11 +99,13 @@ const UploadRentalScreen = () => {
             validationSchema={RentalSchemaValidation}
           >
             {({
+              isSubmitting,
               values,
               handleChange,
               errors,
               setFieldTouched,
               touched,
+              isValid,
               resetForm,
             }) => (
               <View>
@@ -226,9 +243,9 @@ const UploadRentalScreen = () => {
                 <Button
                   mt={5}
                   color="#3740FE"
-                  onPress={() => handleSubmit(values, resetForm)}
+                  onPress={() => handleSubmit(values)}
                 >
-                  Create
+                  Update
                 </Button>
               </View>
             )}
@@ -239,4 +256,4 @@ const UploadRentalScreen = () => {
   )
 }
 
-export default UploadRentalScreen
+export default UpdateRentalScreen

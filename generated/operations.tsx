@@ -22,11 +22,11 @@ export type MyUploadQuery = {
     __typename?: 'rentals'
     id: string
     location: string
-    price?: number | null | undefined
+    price: number
     bedroom: number
-    area?: number | null | undefined
-    thumbnail?: string | null | undefined
-    title?: string | null | undefined
+    area: number
+    thumbnail: string
+    title: string
   }>
 }
 
@@ -37,6 +37,44 @@ export type DeleteRentalMutationVariables = Types.Exact<{
 export type DeleteRentalMutation = {
   __typename?: 'mutation_root'
   delete_rentals?:
+    | {
+        __typename?: 'rentals_mutation_response'
+        affected_rows: number
+        returning: Array<{ __typename?: 'rentals'; id: string }>
+      }
+    | null
+    | undefined
+}
+
+export type RentalDetailQueryVariables = Types.Exact<{
+  id: Types.Scalars['String']
+}>
+
+export type RentalDetailQuery = {
+  __typename?: 'query_root'
+  rentals: Array<{
+    __typename?: 'rentals'
+    id: string
+    location: string
+    price: number
+    bedroom: number
+    area: number
+    thumbnail: string
+    title: string
+    description?: string | null | undefined
+    typeId: number
+    furnitureId?: number | null | undefined
+  }>
+}
+
+export type UpdateRentalMutationVariables = Types.Exact<{
+  id?: Types.Maybe<Types.Scalars['String']>
+  object: Types.Rentals_Set_Input
+}>
+
+export type UpdateRentalMutation = {
+  __typename?: 'mutation_root'
+  update_rentals?:
     | {
         __typename?: 'rentals_mutation_response'
         affected_rows: number

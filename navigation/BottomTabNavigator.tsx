@@ -12,6 +12,7 @@ import { HomeParamList, TabSettingParamList, TabTwoParamList } from '../types'
 import SettingScreen from '../screens/SettingScreen'
 import MyUploadScreen from '../screens/MyUploadScreen'
 import UploadRentalScreen from '../screens/UploadRentalScreen'
+import UpdateRentalScreen from '../screens/UpdateRentalScreen'
 
 const BottomTab = createBottomTabNavigator()
 
@@ -108,6 +109,10 @@ function TabSettingNavigator() {
       <TabSettingStack.Screen
         name="UploadRentalScreen"
         component={UploadRentalScreen}
+      />
+      <TabSettingStack.Screen
+        name="UpdateRentalScreen"
+        component={UpdateRentalScreen}
       />
     </TabSettingStack.Navigator>
   )
