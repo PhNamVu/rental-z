@@ -17,6 +17,7 @@ import { RentalSchemaValidation } from '../helpers/validation'
 import Colors from '../constants/Colors'
 import { negativeToast, positiveToast } from '../helpers/toaster'
 import {
+  MyUploadDocument,
   useRentalDetailQuery,
   useUpdateRentalMutation,
 } from '../generated/hooks'
@@ -33,6 +34,7 @@ const UpdateRentalScreen = () => {
     variables: {
       id,
     },
+    fetchPolicy: 'network-only',
   })
   const rental = data?.rentals[0]
 
@@ -56,6 +58,14 @@ const UpdateRentalScreen = () => {
             thumbnail: values.thumbnail,
           },
         },
+        refetchQueries: [
+          {
+            query: MyUploadDocument,
+            variables: {
+              id: user?.id,
+            },
+          },
+        ],
       })
 
       positiveToast('Update Successful')
@@ -206,6 +216,7 @@ const UpdateRentalScreen = () => {
                 )}
 
                 <Select
+                  selectedValue={values.typeId}
                   p={3}
                   mt={5}
                   placeholder="Property type"
@@ -226,6 +237,7 @@ const UpdateRentalScreen = () => {
                 )}
 
                 <Select
+                  selectedValue={values.furnitureId}
                   mt={5}
                   p={3}
                   placeholder="Furniture type"
