@@ -182,6 +182,14 @@ export const RentalDetailDocument = gql`
       description
       typeId
       furnitureId
+      notes(order_by: { createdAt: asc }) {
+        owner {
+          email
+        }
+        note
+        id
+        createdAt
+      }
     }
   }
 `
@@ -289,6 +297,118 @@ export type UpdateRentalMutationResult =
 export type UpdateRentalMutationOptions = Apollo.BaseMutationOptions<
   Types.UpdateRentalMutation,
   Types.UpdateRentalMutationVariables
+>
+export const AllRentalsDocument = gql`
+  query allRentals($where: rentals_bool_exp) {
+    rentals(where: $where) {
+      id
+      location
+      price
+      bedroom
+      area
+      thumbnail
+      title
+    }
+  }
+`
+
+/**
+ * __useAllRentalsQuery__
+ *
+ * To run a query within a React component, call `useAllRentalsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllRentalsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllRentalsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useAllRentalsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Types.AllRentalsQuery,
+    Types.AllRentalsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<Types.AllRentalsQuery, Types.AllRentalsQueryVariables>(
+    AllRentalsDocument,
+    options
+  )
+}
+export function useAllRentalsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.AllRentalsQuery,
+    Types.AllRentalsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    Types.AllRentalsQuery,
+    Types.AllRentalsQueryVariables
+  >(AllRentalsDocument, options)
+}
+export type AllRentalsQueryHookResult = ReturnType<typeof useAllRentalsQuery>
+export type AllRentalsLazyQueryHookResult = ReturnType<
+  typeof useAllRentalsLazyQuery
+>
+export type AllRentalsQueryResult = Apollo.QueryResult<
+  Types.AllRentalsQuery,
+  Types.AllRentalsQueryVariables
+>
+export const PostRentalNoteDocument = gql`
+  mutation postRentalNote($object: rental_note_insert_input!) {
+    insert_rental_note(objects: [$object]) {
+      affected_rows
+    }
+  }
+`
+export type PostRentalNoteMutationFn = Apollo.MutationFunction<
+  Types.PostRentalNoteMutation,
+  Types.PostRentalNoteMutationVariables
+>
+
+/**
+ * __usePostRentalNoteMutation__
+ *
+ * To run a mutation, you first call `usePostRentalNoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePostRentalNoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [postRentalNoteMutation, { data, loading, error }] = usePostRentalNoteMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function usePostRentalNoteMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.PostRentalNoteMutation,
+    Types.PostRentalNoteMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    Types.PostRentalNoteMutation,
+    Types.PostRentalNoteMutationVariables
+  >(PostRentalNoteDocument, options)
+}
+export type PostRentalNoteMutationHookResult = ReturnType<
+  typeof usePostRentalNoteMutation
+>
+export type PostRentalNoteMutationResult =
+  Apollo.MutationResult<Types.PostRentalNoteMutation>
+export type PostRentalNoteMutationOptions = Apollo.BaseMutationOptions<
+  Types.PostRentalNoteMutation,
+  Types.PostRentalNoteMutationVariables
 >
 export const UsersDocument = gql`
   query users($id: String) {

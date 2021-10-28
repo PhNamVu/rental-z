@@ -64,6 +64,13 @@ export type RentalDetailQuery = {
     description?: string | null | undefined
     typeId: number
     furnitureId?: number | null | undefined
+    notes: Array<{
+      __typename?: 'rental_note'
+      note: string
+      id: string
+      createdAt?: any | null | undefined
+      owner: { __typename?: 'users'; email: string }
+    }>
   }>
 }
 
@@ -80,6 +87,36 @@ export type UpdateRentalMutation = {
         affected_rows: number
         returning: Array<{ __typename?: 'rentals'; id: string }>
       }
+    | null
+    | undefined
+}
+
+export type AllRentalsQueryVariables = Types.Exact<{
+  where?: Types.Maybe<Types.Rentals_Bool_Exp>
+}>
+
+export type AllRentalsQuery = {
+  __typename?: 'query_root'
+  rentals: Array<{
+    __typename?: 'rentals'
+    id: string
+    location: string
+    price: number
+    bedroom: number
+    area: number
+    thumbnail: string
+    title: string
+  }>
+}
+
+export type PostRentalNoteMutationVariables = Types.Exact<{
+  object: Types.Rental_Note_Insert_Input
+}>
+
+export type PostRentalNoteMutation = {
+  __typename?: 'mutation_root'
+  insert_rental_note?:
+    | { __typename?: 'rental_note_mutation_response'; affected_rows: number }
     | null
     | undefined
 }

@@ -38,6 +38,7 @@ export type HomeParamList = {
   SavedScreen: undefined
   CategoriesScreen: undefined
   SettingScreen: undefined
+  RentalDetailScreen: undefined
 }
 
 export type TabTwoParamList = {

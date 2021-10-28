@@ -307,6 +307,10 @@ export type Mutation_Root = {
   delete_property_types?: Maybe<Property_Types_Mutation_Response>
   /** delete single row from the table: "property_types" */
   delete_property_types_by_pk?: Maybe<Property_Types>
+  /** delete data from the table: "rental_note" */
+  delete_rental_note?: Maybe<Rental_Note_Mutation_Response>
+  /** delete single row from the table: "rental_note" */
+  delete_rental_note_by_pk?: Maybe<Rental_Note>
   /** delete data from the table: "rentals" */
   delete_rentals?: Maybe<Rentals_Mutation_Response>
   /** delete single row from the table: "rentals" */
@@ -323,6 +327,10 @@ export type Mutation_Root = {
   insert_property_types?: Maybe<Property_Types_Mutation_Response>
   /** insert a single row into the table: "property_types" */
   insert_property_types_one?: Maybe<Property_Types>
+  /** insert data into the table: "rental_note" */
+  insert_rental_note?: Maybe<Rental_Note_Mutation_Response>
+  /** insert a single row into the table: "rental_note" */
+  insert_rental_note_one?: Maybe<Rental_Note>
   /** insert data into the table: "rentals" */
   insert_rentals?: Maybe<Rentals_Mutation_Response>
   /** insert a single row into the table: "rentals" */
@@ -340,6 +348,10 @@ export type Mutation_Root = {
   update_property_types?: Maybe<Property_Types_Mutation_Response>
   /** update single row of the table: "property_types" */
   update_property_types_by_pk?: Maybe<Property_Types>
+  /** update data of the table: "rental_note" */
+  update_rental_note?: Maybe<Rental_Note_Mutation_Response>
+  /** update single row of the table: "rental_note" */
+  update_rental_note_by_pk?: Maybe<Rental_Note>
   /** update data of the table: "rentals" */
   update_rentals?: Maybe<Rentals_Mutation_Response>
   /** update single row of the table: "rentals" */
@@ -369,6 +381,16 @@ export type Mutation_RootDelete_Property_TypesArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Property_Types_By_PkArgs = {
   id: Scalars['Int']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Rental_NoteArgs = {
+  where: Rental_Note_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Rental_Note_By_PkArgs = {
+  id: Scalars['String']
 }
 
 /** mutation root */
@@ -413,6 +435,18 @@ export type Mutation_RootInsert_Property_TypesArgs = {
 export type Mutation_RootInsert_Property_Types_OneArgs = {
   object: Property_Types_Insert_Input
   on_conflict?: Maybe<Property_Types_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Rental_NoteArgs = {
+  objects: Array<Rental_Note_Insert_Input>
+  on_conflict?: Maybe<Rental_Note_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Rental_Note_OneArgs = {
+  object: Rental_Note_Insert_Input
+  on_conflict?: Maybe<Rental_Note_On_Conflict>
 }
 
 /** mutation root */
@@ -470,6 +504,18 @@ export type Mutation_RootUpdate_Property_Types_By_PkArgs = {
   _inc?: Maybe<Property_Types_Inc_Input>
   _set?: Maybe<Property_Types_Set_Input>
   pk_columns: Property_Types_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Rental_NoteArgs = {
+  _set?: Maybe<Rental_Note_Set_Input>
+  where: Rental_Note_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Rental_Note_By_PkArgs = {
+  _set?: Maybe<Rental_Note_Set_Input>
+  pk_columns: Rental_Note_Pk_Columns_Input
 }
 
 /** mutation root */
@@ -738,6 +784,12 @@ export type Query_Root = {
   property_types_aggregate: Property_Types_Aggregate
   /** fetch data from the table: "property_types" using primary key columns */
   property_types_by_pk?: Maybe<Property_Types>
+  /** fetch data from the table: "rental_note" */
+  rental_note: Array<Rental_Note>
+  /** fetch aggregated fields from the table: "rental_note" */
+  rental_note_aggregate: Rental_Note_Aggregate
+  /** fetch data from the table: "rental_note" using primary key columns */
+  rental_note_by_pk?: Maybe<Rental_Note>
   /** fetch data from the table: "rentals" */
   rentals: Array<Rentals>
   /** An aggregate relationship */
@@ -792,6 +844,26 @@ export type Query_RootProperty_Types_By_PkArgs = {
   id: Scalars['Int']
 }
 
+export type Query_RootRental_NoteArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+export type Query_RootRental_Note_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+export type Query_RootRental_Note_By_PkArgs = {
+  id: Scalars['String']
+}
+
 export type Query_RootRentalsArgs = {
   distinct_on?: Maybe<Array<Rentals_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -832,6 +904,200 @@ export type Query_RootUsers_By_PkArgs = {
   id: Scalars['String']
 }
 
+/** columns and relationships of "rental_note" */
+export type Rental_Note = {
+  __typename?: 'rental_note'
+  /** createdAt */
+  createdAt?: Maybe<Scalars['timestamptz']>
+  id: Scalars['String']
+  note: Scalars['String']
+  /** An object relationship */
+  owner: Users
+  /** An object relationship */
+  rental: Rentals
+  rentalId: Scalars['String']
+  userId: Scalars['String']
+}
+
+/** aggregated selection of "rental_note" */
+export type Rental_Note_Aggregate = {
+  __typename?: 'rental_note_aggregate'
+  aggregate?: Maybe<Rental_Note_Aggregate_Fields>
+  nodes: Array<Rental_Note>
+}
+
+/** aggregate fields of "rental_note" */
+export type Rental_Note_Aggregate_Fields = {
+  __typename?: 'rental_note_aggregate_fields'
+  count: Scalars['Int']
+  max?: Maybe<Rental_Note_Max_Fields>
+  min?: Maybe<Rental_Note_Min_Fields>
+}
+
+/** aggregate fields of "rental_note" */
+export type Rental_Note_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Rental_Note_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+/** order by aggregate values of table "rental_note" */
+export type Rental_Note_Aggregate_Order_By = {
+  count?: Maybe<Order_By>
+  max?: Maybe<Rental_Note_Max_Order_By>
+  min?: Maybe<Rental_Note_Min_Order_By>
+}
+
+/** input type for inserting array relation for remote table "rental_note" */
+export type Rental_Note_Arr_Rel_Insert_Input = {
+  data: Array<Rental_Note_Insert_Input>
+  /** on conflict condition */
+  on_conflict?: Maybe<Rental_Note_On_Conflict>
+}
+
+/** Boolean expression to filter rows from the table "rental_note". All fields are combined with a logical 'AND'. */
+export type Rental_Note_Bool_Exp = {
+  _and?: Maybe<Array<Rental_Note_Bool_Exp>>
+  _not?: Maybe<Rental_Note_Bool_Exp>
+  _or?: Maybe<Array<Rental_Note_Bool_Exp>>
+  createdAt?: Maybe<Timestamptz_Comparison_Exp>
+  id?: Maybe<String_Comparison_Exp>
+  note?: Maybe<String_Comparison_Exp>
+  owner?: Maybe<Users_Bool_Exp>
+  rental?: Maybe<Rentals_Bool_Exp>
+  rentalId?: Maybe<String_Comparison_Exp>
+  userId?: Maybe<String_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "rental_note" */
+export enum Rental_Note_Constraint {
+  /** unique or primary key constraint */
+  RentalNotePkey = 'rental_note_pkey',
+}
+
+/** input type for inserting data into table "rental_note" */
+export type Rental_Note_Insert_Input = {
+  /** createdAt */
+  createdAt?: Maybe<Scalars['timestamptz']>
+  id?: Maybe<Scalars['String']>
+  note?: Maybe<Scalars['String']>
+  owner?: Maybe<Users_Obj_Rel_Insert_Input>
+  rental?: Maybe<Rentals_Obj_Rel_Insert_Input>
+  rentalId?: Maybe<Scalars['String']>
+  userId?: Maybe<Scalars['String']>
+}
+
+/** aggregate max on columns */
+export type Rental_Note_Max_Fields = {
+  __typename?: 'rental_note_max_fields'
+  /** createdAt */
+  createdAt?: Maybe<Scalars['timestamptz']>
+  id?: Maybe<Scalars['String']>
+  note?: Maybe<Scalars['String']>
+  rentalId?: Maybe<Scalars['String']>
+  userId?: Maybe<Scalars['String']>
+}
+
+/** order by max() on columns of table "rental_note" */
+export type Rental_Note_Max_Order_By = {
+  /** createdAt */
+  createdAt?: Maybe<Order_By>
+  id?: Maybe<Order_By>
+  note?: Maybe<Order_By>
+  rentalId?: Maybe<Order_By>
+  userId?: Maybe<Order_By>
+}
+
+/** aggregate min on columns */
+export type Rental_Note_Min_Fields = {
+  __typename?: 'rental_note_min_fields'
+  /** createdAt */
+  createdAt?: Maybe<Scalars['timestamptz']>
+  id?: Maybe<Scalars['String']>
+  note?: Maybe<Scalars['String']>
+  rentalId?: Maybe<Scalars['String']>
+  userId?: Maybe<Scalars['String']>
+}
+
+/** order by min() on columns of table "rental_note" */
+export type Rental_Note_Min_Order_By = {
+  /** createdAt */
+  createdAt?: Maybe<Order_By>
+  id?: Maybe<Order_By>
+  note?: Maybe<Order_By>
+  rentalId?: Maybe<Order_By>
+  userId?: Maybe<Order_By>
+}
+
+/** response of any mutation on the table "rental_note" */
+export type Rental_Note_Mutation_Response = {
+  __typename?: 'rental_note_mutation_response'
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Rental_Note>
+}
+
+/** on conflict condition type for table "rental_note" */
+export type Rental_Note_On_Conflict = {
+  constraint: Rental_Note_Constraint
+  update_columns?: Array<Rental_Note_Update_Column>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "rental_note". */
+export type Rental_Note_Order_By = {
+  createdAt?: Maybe<Order_By>
+  id?: Maybe<Order_By>
+  note?: Maybe<Order_By>
+  owner?: Maybe<Users_Order_By>
+  rental?: Maybe<Rentals_Order_By>
+  rentalId?: Maybe<Order_By>
+  userId?: Maybe<Order_By>
+}
+
+/** primary key columns input for table: rental_note */
+export type Rental_Note_Pk_Columns_Input = {
+  id: Scalars['String']
+}
+
+/** select columns of table "rental_note" */
+export enum Rental_Note_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Note = 'note',
+  /** column name */
+  RentalId = 'rentalId',
+  /** column name */
+  UserId = 'userId',
+}
+
+/** input type for updating data in table "rental_note" */
+export type Rental_Note_Set_Input = {
+  /** createdAt */
+  createdAt?: Maybe<Scalars['timestamptz']>
+  id?: Maybe<Scalars['String']>
+  note?: Maybe<Scalars['String']>
+  rentalId?: Maybe<Scalars['String']>
+  userId?: Maybe<Scalars['String']>
+}
+
+/** update columns of table "rental_note" */
+export enum Rental_Note_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Note = 'note',
+  /** column name */
+  RentalId = 'rentalId',
+  /** column name */
+  UserId = 'userId',
+}
+
 /** columns and relationships of "rentals" */
 export type Rentals = {
   __typename?: 'rentals'
@@ -843,6 +1109,10 @@ export type Rentals = {
   furnitureId?: Maybe<Scalars['Int']>
   id: Scalars['String']
   location: Scalars['String']
+  /** An array relationship */
+  notes: Array<Rental_Note>
+  /** An aggregate relationship */
+  notes_aggregate: Rental_Note_Aggregate
   price: Scalars['Int']
   /** An object relationship */
   property: Property_Types
@@ -852,6 +1122,24 @@ export type Rentals = {
   thumbnail: Scalars['String']
   title: Scalars['String']
   typeId: Scalars['Int']
+}
+
+/** columns and relationships of "rentals" */
+export type RentalsNotesArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+/** columns and relationships of "rentals" */
+export type RentalsNotes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
 }
 
 /** aggregated selection of "rentals" */
@@ -936,6 +1224,7 @@ export type Rentals_Bool_Exp = {
   furnitureId?: Maybe<Int_Comparison_Exp>
   id?: Maybe<String_Comparison_Exp>
   location?: Maybe<String_Comparison_Exp>
+  notes?: Maybe<Rental_Note_Bool_Exp>
   price?: Maybe<Int_Comparison_Exp>
   property?: Maybe<Property_Types_Bool_Exp>
   reporter?: Maybe<Users_Bool_Exp>
@@ -969,6 +1258,7 @@ export type Rentals_Insert_Input = {
   furnitureId?: Maybe<Scalars['Int']>
   id?: Maybe<Scalars['String']>
   location?: Maybe<Scalars['String']>
+  notes?: Maybe<Rental_Note_Arr_Rel_Insert_Input>
   price?: Maybe<Scalars['Int']>
   property?: Maybe<Property_Types_Obj_Rel_Insert_Input>
   reporter?: Maybe<Users_Obj_Rel_Insert_Input>
@@ -1049,6 +1339,13 @@ export type Rentals_Mutation_Response = {
   returning: Array<Rentals>
 }
 
+/** input type for inserting object relation for remote table "rentals" */
+export type Rentals_Obj_Rel_Insert_Input = {
+  data: Rentals_Insert_Input
+  /** on conflict condition */
+  on_conflict?: Maybe<Rentals_On_Conflict>
+}
+
 /** on conflict condition type for table "rentals" */
 export type Rentals_On_Conflict = {
   constraint: Rentals_Constraint
@@ -1065,6 +1362,7 @@ export type Rentals_Order_By = {
   furnitureId?: Maybe<Order_By>
   id?: Maybe<Order_By>
   location?: Maybe<Order_By>
+  notes_aggregate?: Maybe<Rental_Note_Aggregate_Order_By>
   price?: Maybe<Order_By>
   property?: Maybe<Property_Types_Order_By>
   reporter?: Maybe<Users_Order_By>
@@ -1293,6 +1591,12 @@ export type Subscription_Root = {
   property_types_aggregate: Property_Types_Aggregate
   /** fetch data from the table: "property_types" using primary key columns */
   property_types_by_pk?: Maybe<Property_Types>
+  /** fetch data from the table: "rental_note" */
+  rental_note: Array<Rental_Note>
+  /** fetch aggregated fields from the table: "rental_note" */
+  rental_note_aggregate: Rental_Note_Aggregate
+  /** fetch data from the table: "rental_note" using primary key columns */
+  rental_note_by_pk?: Maybe<Rental_Note>
   /** fetch data from the table: "rentals" */
   rentals: Array<Rentals>
   /** An aggregate relationship */
@@ -1345,6 +1649,26 @@ export type Subscription_RootProperty_Types_AggregateArgs = {
 
 export type Subscription_RootProperty_Types_By_PkArgs = {
   id: Scalars['Int']
+}
+
+export type Subscription_RootRental_NoteArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+export type Subscription_RootRental_Note_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+export type Subscription_RootRental_Note_By_PkArgs = {
+  id: Scalars['String']
 }
 
 export type Subscription_RootRentalsArgs = {
@@ -1408,12 +1732,34 @@ export type Users = {
   firstName?: Maybe<Scalars['String']>
   id: Scalars['String']
   lastName?: Maybe<Scalars['String']>
+  /** An array relationship */
+  rental_notes: Array<Rental_Note>
+  /** An aggregate relationship */
+  rental_notes_aggregate: Rental_Note_Aggregate
   /** fetch data from the table: "rentals" */
   rentals: Array<Rentals>
   /** An aggregate relationship */
   rentals_aggregate: Rentals_Aggregate
   role: Scalars['String']
   status?: Maybe<Scalars['String']>
+}
+
+/** columns and relationships of "users" */
+export type UsersRental_NotesArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
+}
+
+/** columns and relationships of "users" */
+export type UsersRental_Notes_AggregateArgs = {
+  distinct_on?: Maybe<Array<Rental_Note_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Rental_Note_Order_By>>
+  where?: Maybe<Rental_Note_Bool_Exp>
 }
 
 /** columns and relationships of "users" */
@@ -1465,6 +1811,7 @@ export type Users_Bool_Exp = {
   firstName?: Maybe<String_Comparison_Exp>
   id?: Maybe<String_Comparison_Exp>
   lastName?: Maybe<String_Comparison_Exp>
+  rental_notes?: Maybe<Rental_Note_Bool_Exp>
   rentals?: Maybe<Rentals_Bool_Exp>
   role?: Maybe<String_Comparison_Exp>
   status?: Maybe<String_Comparison_Exp>
@@ -1485,6 +1832,7 @@ export type Users_Insert_Input = {
   firstName?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
   lastName?: Maybe<Scalars['String']>
+  rental_notes?: Maybe<Rental_Note_Arr_Rel_Insert_Input>
   rentals?: Maybe<Rentals_Arr_Rel_Insert_Input>
   role?: Maybe<Scalars['String']>
   status?: Maybe<Scalars['String']>
@@ -1544,6 +1892,7 @@ export type Users_Order_By = {
   firstName?: Maybe<Order_By>
   id?: Maybe<Order_By>
   lastName?: Maybe<Order_By>
+  rental_notes_aggregate?: Maybe<Rental_Note_Aggregate_Order_By>
   rentals_aggregate?: Maybe<Rentals_Aggregate_Order_By>
   role?: Maybe<Order_By>
   status?: Maybe<Order_By>

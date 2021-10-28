@@ -29,7 +29,7 @@ const MyUploadScreen = () => {
     fetchPolicy: 'network-only',
   })
 
-  const rentals = data?.rentals
+  const rentals = data?.rentals || []
 
   return (
     <View mt={20} mx={10}>

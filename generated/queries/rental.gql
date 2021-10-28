@@ -37,6 +37,14 @@ query rentalDetail($id: String!) {
     description
     typeId
     furnitureId
+    notes(order_by: { createdAt: asc }) {
+      owner {
+        email
+      }
+      note
+      id
+      createdAt
+    }
   }
 }
 
@@ -46,5 +54,17 @@ mutation updateRental($id: String, $object: rentals_set_input!) {
     returning {
       id
     }
+  }
+}
+
+query allRentals($where: rentals_bool_exp) {
+  rentals(where: $where) {
+    id
+    location
+    price
+    bedroom
+    area
+    thumbnail
+    title
   }
 }

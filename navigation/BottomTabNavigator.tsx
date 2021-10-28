@@ -13,6 +13,7 @@ import SettingScreen from '../screens/SettingScreen'
 import MyUploadScreen from '../screens/MyUploadScreen'
 import UploadRentalScreen from '../screens/UploadRentalScreen'
 import UpdateRentalScreen from '../screens/UpdateRentalScreen'
+import RentalDetailScreen from '../screens/RentalDetailScreen'
 
 const BottomTab = createBottomTabNavigator()
 
@@ -73,6 +74,10 @@ function HomeNavigator() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+      <HomeStack.Screen
+        name="RentalDetailScreen"
+        component={RentalDetailScreen}
+      />
     </HomeStack.Navigator>
   )
 }

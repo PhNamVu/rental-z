@@ -1,0 +1,5 @@
+mutation postRentalNote($object: rental_note_insert_input!) {
+  insert_rental_note(objects: [$object]) {
+    affected_rows
+  }
+}

@@ -14,8 +14,6 @@ import { negativeToast, positiveToast } from '../../helpers/toaster'
 import { useAuth } from '../../hooks/useAuth'
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { RootStackParamList } from '../../types'
 
 interface Props {
   rental: any
@@ -28,7 +26,7 @@ const RentalComponent: React.FC<Props> = ({ rental, editable, canSave }) => {
   const {
     state: { user },
   }: any = useAuth()
-  const [isSaved, setIsSaved] = React.useState(true)
+  const [saved, setSaved] = React.useState(false)
   const navigation = useNavigation()
 
   const [deleteRental] = useDeleteRentalMutation({
@@ -55,7 +53,11 @@ const RentalComponent: React.FC<Props> = ({ rental, editable, canSave }) => {
     }
   }
   return (
-    <TouchableOpacity onPress={() => console.log('Touchable')}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('RentalDetailScreen', { id: rental.id })
+      }
+    >
       <Box
         my={2}
         rounded="lg"
@@ -86,15 +88,17 @@ const RentalComponent: React.FC<Props> = ({ rental, editable, canSave }) => {
             </Box>
             {canSave && (
               <IconButton
+                onPress={() => {
+                  setSaved(!saved)
+                }}
                 icon={
                   <Icon
                     as={AntDesign}
-                    color={isSaved ? 'pink.500' : 'grey'}
+                    color={saved ? 'pink.500' : 'grey'}
                     name="heart"
                     size={5}
                   />
                 }
-                onPress={() => console.info('pressed')}
               />
             )}
             {editable && (
