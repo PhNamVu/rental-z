@@ -1,35 +1,15 @@
 import * as React from 'react'
-import { FlatList, Text, View } from 'native-base'
+import { Text, View } from 'native-base'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Colors from '../constants/Colors'
 import SearchBar from '../components/SearchBar'
-import { useAllRentalsQuery } from '../generated/hooks'
-import RentalComponent from '../components/shared/RentalComponent'
 import useDebounce from '../hooks/use-debounce'
+import RentalList from '../components/RentalList'
 
 const HomeScreen = () => {
   const [input, setInput] = React.useState('')
-  const searchTerm = useDebounce(input, 1000)
-  const { data } = useAllRentalsQuery({
-    variables: {
-      where: {
-        _and: [
-          {
-            title: {
-              _ilike: `%${searchTerm}%`,
-            },
-          },
-          {
-            location: {
-              _ilike: `%${searchTerm}%`,
-            },
-          },
-        ],
-      },
-    },
-    fetchPolicy: 'network-only',
-  })
-  const rentals = data?.rentals || []
+  const searchTerm = useDebounce(input, 500)
+
   return (
     <SafeAreaView>
       <View m={6}>
@@ -38,12 +18,8 @@ const HomeScreen = () => {
           Find your dream 🏠
         </Text>
         <SearchBar input={input} setInput={setInput} />
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          data={rentals}
-          renderItem={({ item }) => <RentalComponent rental={item} canSave />}
-          keyExtractor={(item) => item.id}
-        />
+
+        <RentalList searchTerm={searchTerm} />
       </View>
     </SafeAreaView>
   )
