@@ -9,8 +9,7 @@ interface Props {
 }
 
 const RentalList: React.FC<Props> = ({ searchTerm }) => {
-  console.log(searchTerm)
-  const { data, loading } = useAllRentalsQuery({
+  const { data, loading, error } = useAllRentalsQuery({
     variables: {
       where: {
         _and: [
@@ -43,6 +42,9 @@ const RentalList: React.FC<Props> = ({ searchTerm }) => {
   const rentals = data?.rentals || []
   if (loading) {
     return <Text>Loading...</Text>
+  }
+  if (error) {
+    return <Text>Something went wrong</Text>
   }
 
   return (
