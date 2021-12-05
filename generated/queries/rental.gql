@@ -1,0 +1,70 @@
+mutation postRental($object: rentals_insert_input!) {
+  insert_rentals(objects: [$object]) {
+    affected_rows
+  }
+}
+
+query myUpload($reporterId: String!) {
+  rentals(where: { reporterId: { _eq: $reporterId } }) {
+    id
+    location
+    price
+    bedroom
+    area
+    thumbnail
+    title
+  }
+}
+
+mutation deleteRental($id: String!) {
+  delete_rentals(where: { id: { _eq: $id } }) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+query rentalDetail($id: String!) {
+  rentals(where: { id: { _eq: $id } }) {
+    id
+    location
+    price
+    bedroom
+    area
+    thumbnail
+    title
+    description
+    typeId
+    furnitureId
+    notes(order_by: { createdAt: asc }) {
+      owner {
+        email
+      }
+      note
+      id
+      createdAt
+    }
+  }
+}
+
+mutation updateRental($id: String, $object: rentals_set_input!) {
+  update_rentals(where: { id: { _eq: $id } }, _set: $object) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+
+query allRentals($where: rentals_bool_exp) {
+  rentals(where: $where) {
+    id
+    location
+    price
+    bedroom
+    area
+    thumbnail
+    title
+  }
+}
